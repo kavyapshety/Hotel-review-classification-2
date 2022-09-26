@@ -60,19 +60,7 @@ def main():
             """
             st.markdown(html_temp,unsafe_allow_html=True)
 
-# Title of the application 
-st.title('Text analysis \n', )
-st.header("Sentiment Analysis")
-st.subheader("Enter the text here")
 
-input_text = st.text_area("Enter the review", height=50)
-
-# Sidebar options
-option = st.sidebar.selectbox('Navigation',['Sentiment Analysis','Word Cloud'])
-st.set_option('deprecation.showfileUploaderEncoding', False)
-if option == "Sentiment Analysis":
-    
-    
     
     if st.button("Predict sentiment"):
         st.write("Number of words in Review:", len(input_text.split()))
