@@ -46,7 +46,6 @@ def main():
     menu_list = ["Hotel-review-classification-2"]
     menu = st.radio("Menu", menu_list)
 
- if menu == 'Hotel-review-classification-2':
             
             st.title("Hotel-review-classification-2")
             #import the image
