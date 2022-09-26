@@ -16,50 +16,25 @@ import matplotlib.pyplot as plt
 warnings.filterwarnings(action='ignore')
 st.set_option('deprecation.showPyplotGlobalUse', False)
 
-
 # loading the trained model
-filename = open('svc_model_fitted.pkl', 'rb') 
-model = pickle.load(filename)
+pickle_in = open('Hotel Reviews final.pkl', 'rb') 
+model = pickle.load(pickle_in)
 
-def main():
-    # set page title
-    st.set_page_config('Hotel review')
+pickle_in = open('svc_model_fitted.pkl', 'rb') 
+vectorizer = pickle.load(pickle_in)
+# Title of the application 
+st.title('Text Analysis Tool\n', )
+st.header("Sentiment Analysis Tool")
+st.subheader("Enter the review that you want to analyze")
 
-    st.title('Hotel review classification')
-    # Using "with" notation
-    with st.sidebar:
-        image= Image.open("iidt_logo_138.jpeg")
-        add_image=st.image(image,use_column_width=True)
+input_text = st.text_area("Enter review", height=50)
 
-    social_acc = ['About']
-    social_acc_nav = st.sidebar.selectbox('About', social_acc)
-    if social_acc_nav == 'About':
-        st.sidebar.markdown("<h2 style='text-align: center;'> This Project completed under ExcelR, the team completed the project:</h2> ", unsafe_allow_html=True)
-        st.sidebar.markdown('''---''')
-        st.sidebar.markdown('''
-        • Miss. Kavya M P \n
-        • Miss. Payal vishal kathar \n
-        • Miss. Priyanka sunil mahule \n 
-        • Mr.Nidhin K V \n
-        ''')
-        st.sidebar.markdown("[ Visit To Github Repositories](https://github.com/kavyapshety/Hotel-review-classification-2.git)")   
-    menu_list = ["Hotel-review-classification-2"]
-    menu = st.radio("Menu", menu_list)
-
-            
-            st.title("Hotel-review-classification-2")
-            #import the image
-            image= Image.open("Header_hotel_rating_classification.jpeg")
-            st.image(image,use_column_width=True)
-
-            html_temp = """
-            <div style="background-color:tomato;padding:10px">
-            <h2 style="color:white;text-align:center;">hotel review classification </h2>
-            </div>
-            """
-            st.markdown(html_temp,unsafe_allow_html=True)
-
-
+# Sidebar options
+option = st.sidebar.selectbox('Navigation',['Sentiment Analysis','Word Cloud'])
+st.set_option('deprecation.showfileUploaderEncoding', False)
+if option == "Sentiment Analysis":
+    
+    
     
     if st.button("Predict sentiment"):
         st.write("Number of words in Review:", len(input_text.split()))
@@ -69,9 +44,11 @@ def main():
         text=text.split(' ')
         text = [wordnet.lemmatize(word) for word in text if word not in (stopwords.words('english'))]
         text = ' '.join(text)
-        filename = open('svc_model_fitted.pkl', 'rb') 
-        model = pickle.load(filename)
-        
+        pickle_in = open('Hotel Reviews final.pkl', 'rb') 
+        model = pickle.load(pickle_in)
+        pickle_in = open('svc_model_fitted.pkl', 'rb') 
+        vectorizer = pickle.load(pickle_in)
+        transformed_input = vectorizer.transform([text])
         
         if model.predict(transformed_input) ==0:
             st.write("Input review has Negative Sentiment.:sad:")
