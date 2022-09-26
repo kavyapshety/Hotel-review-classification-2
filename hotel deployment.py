@@ -9,9 +9,20 @@ import streamlit as st
 import pickle
 import spacy
 import numpy as np
+import pandas as pd
+import random
+from PIL import Image
+import joblib
+import streamlit.components.v1 as components
+from joblib import dump, load
+import joblib
 from sklearn.svm import SVC
 from sklearn.feature_extraction.text import TfidfVectorizer
 
+#load model
+# load the model from disk
+with open('C:/Users/advai/hotel project/Hotel Reviews final.pkl','rb') as f:
+        model=joblib.load(f)
 
 # Body of the application
 st.header("Hotel Review Prediction Application.")
@@ -22,11 +33,6 @@ st.markdown("This application is trained on machine learning model.\n "
 
 text = st.text_input("Type your review here...", """""")
 
-
-# Working on prediction
-# Loading trained model
-loaded_model = pickle.load(
-    open("E:/project file/svc_model_fitted.pickle", "rb"))
 
 
 # Preprocessing the text
@@ -70,3 +76,41 @@ if st.button("Click to make prediction"):
 else:
     pass
 
+def main():
+    # set page title
+    st.set_page_config('NLP classification')
+
+    st.title('Hotel review classification')
+    # Using "with" notation
+    with st.sidebar:
+        image= Image.open("iidt_logo_138.jpeg")
+        add_image=st.image(image,use_column_width=True)
+
+    social_acc = ['About']
+    social_acc_nav = st.sidebar.selectbox('About', social_acc)
+    if social_acc_nav == 'About':
+        st.sidebar.markdown("<h2 style='text-align: center;'> This Project completed under ExcelR, the team completed the project:</h2> ", unsafe_allow_html=True)
+        st.sidebar.markdown('''---''')
+        st.sidebar.markdown('''
+        • Miss. Kavya M P \n
+        • Mr. Raju A S \n
+        • Mr. AMAN SAJAD \n 
+        • Mr.Raghavendra R \n
+        ''')
+        st.sidebar.markdown("[ Visit To Github Repositories](https://github.com/kavyapshety/Hotel-review-classification-2.git)")   
+    menu_list = [""]
+    menu = st.radio("Menu", menu_list)
+               
+    if menu == 'Hotel-review-classification-2':
+            
+            st.title("Hotel-review-classification-2")
+            #import the image
+            image= Image.open("header_hotel_rating_classification.jpeg")
+            st.image(image,use_column_width=True)
+
+            html_temp = """
+            <div style="background-color:tomato;padding:10px">
+            <h2 style="color:white;text-align:center;">Hotel review classification </h2>
+            </div>
+            """
+            st.markdown(html_temp,unsafe_allow_html=True)
