@@ -61,20 +61,13 @@ if st.button("Click to make prediction"):
     prediction = int(loaded_model.predict(preprocessed_input))
     st.write(prediction)
 
-    # Returning true prediction
-    if prediction == -1:
-        st.write("Negative")
-    elif prediction == 1:
-        st.write("Positive")
+    
+       # Returning true prediction
+    if prediction == 0:
+        st.write("Input review has Negative Sentiment.:sad:🙁")
+    elif prediction == 2:
+        st.write("Input review has Positive Sentiment.:smile:😀")
     else:
-        st.write("Neutral")
+        st.write("Input review has Neutral Sentiment.😐")
 else:
     pass
-
-
-if model.predict(transformed_input) ==0:
-            st.write("Input review has Negative Sentiment.:sad:")
-        elif model.predict(transformed_input) ==2:
-            st.write("Input review has Positive Sentiment.:smile:")
-        else:
-            st.write(" Input review has Neutral Sentiment.😐")
