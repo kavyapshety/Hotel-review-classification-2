@@ -12,6 +12,15 @@ import spacy
 import numpy as np
 from sklearn.svm import SVC
 from sklearn.feature_extraction.text import TfidfVectorizer
+import pandas as pd
+import random
+from PIL import Image
+import joblib
+import streamlit.components.v1 as components
+from joblib import dump, load
+import joblib
+from sklearn.feature_extraction.text import TfidfVectorizer
+
 
 
 # Body of the application
