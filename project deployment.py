@@ -31,7 +31,7 @@ loaded_model = pickle.load(
 
 
 # Preprocessing the text
-nlp = spacy.load("en_core_web_sm")
+nlp = spacy.load("en_core_web_lg")
 
 def preprocessing(text):
     """Takes the text input and removes the stop words and punctuations from the text and gives processed text output.
@@ -72,3 +72,9 @@ else:
     pass
 
 
+if model.predict(transformed_input) ==0:
+            st.write("Input review has Negative Sentiment.:sad:")
+        elif model.predict(transformed_input) ==2:
+            st.write("Input review has Positive Sentiment.:smile:")
+        else:
+            st.write(" Input review has Neutral Sentiment.😐")
